@@ -13,8 +13,10 @@ $qs = str_replace($url, '', $qs);
 
 // Merge the pre-redirect querystring back in
 $parsed_uri = parse_url($request_uri);
-parse_str($parsed_uri["query"], $qs_array);
-$_GET = array_merge($_GET, $qs_array);
+if(isset($parsed_uri["query"])) {
+	parse_str($parsed_uri["query"], $qs_array);
+	$_GET = array_merge($_GET, $qs_array);
+}
 
 // Channel ID
 isset($_GET['channel']) ? $channel = intval($_GET['channel']): $channel = 0;
@@ -51,8 +53,17 @@ if (array_key_exists($api_url, $allowed_fields)) {
  	        //print "<pre>".json_encode($row)."</pre>";
  	       	$string .= '
  			{
- 				"tour_id" : '.$item->tour_id.',
- 				"tour_name" : "'.$item->tour_name.'"
+ 			';
+ 			
+ 			foreach ($allowed_fields[$api_url] as $field) {
+ 				$exploded = explode("->", $field);
+ 				count($exploded) == 1 ? $value = $item->$exploded[0] : $value = $item->$exploded[0]->$exploded[1];
+ 				
+ 				$string .= '
+ 					"'.$field.'" : '.json_encode((string)$value).',';
+ 			}	
+ 			$string = substr($string, 0, strlen($string) - 1); 
+ 			$string .= '
  			}, ';
  	        
  		}

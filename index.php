@@ -39,9 +39,9 @@ if(isset($_GET['callback'])) {
 if (array_key_exists($api_url, $allowed_fields)) {
     
     $tourcms = new TourCMS($marketplace_account_id, $api_private_key, "simplexml");
- 
- 	$result = $tourcms->request($api_url, $channel);
- 	
+
+ 	$result = $tourcms->request($api_url.$qs, $channel);
+
  	$error = $result->error;
  	
  	$string = '{

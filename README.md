@@ -10,7 +10,7 @@ Provides a JSON / JSONP wrapper to a subset of the TourCMS Marketplace API
 
 Examples are written in JavaScript using [JQuery](http://jquery.com/) and hosted on [JSBin](http://jsbin.com/).
 
-Click **Working example** then **Edit in JSBin** on any of the examples to view / play with the code.
+Click **Working example** then **Edit in JSBin** (top right corner) on any of the examples to view / play with the code.
 
 * Search all Tours/Hotels from Channel 6: [Working example](http://jsbin.com/ipehew/3/), [JSON](http://www.tourcms.com/scratch/api/json/c/tours/search.json?channel=6&return=text)
 * Show details on Tour/Hotel ID 167 from Channel 6: [Working example](http://jsbin.com/enocit/9), [JSON](http://www.tourcms.com/scratch/api/json/c/tour/show.json?channel=6&id=167&return=text)

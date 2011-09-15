@@ -77,7 +77,9 @@
 			"channel->logo_url",
 			"channel->lang",
 			"channel->home_url",
-			"channel->home_url_tracked"
+			"channel->home_url_tracked",
+			"soonest_special_offer",
+			"recent_special_offer"
 		),
 		
 		// Tour Search (all channels)
@@ -139,7 +141,9 @@
 			"channel->logo_url",
 			"channel->lang",
 			"channel->home_url",
-			"channel->home_url_tracked"
+			"channel->home_url_tracked",
+			"soonest_special_offer",
+			"recent_special_offer"
 		),
 				
 		// Tour Show

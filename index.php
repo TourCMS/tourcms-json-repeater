@@ -59,7 +59,7 @@ if (array_key_exists($api_url, $allowed_fields)) {
  			';
  			
  			foreach ($allowed_fields[$api_url] as $field) {
- 				// Handle images separately
+ 			// Handle images separately
  				if($field=="images") {
 	 				$string .= '
 	 					"images" : [';
@@ -74,7 +74,23 @@ if (array_key_exists($api_url, $allowed_fields)) {
 	 				
 	 				$string .= '
 	 					],';
-	 			// All other fields handled simply
+	 		// Also handle special offers separately
+	 			} else if($field=="soonest_special_offer" || $field=="recent_special_offer") {
+	 				if(isset($item->$field)) {
+		 				$string .= '
+		 				"'.$field.'" : {';
+		 					$offer_fields = array("start_date", "end_date", "date_code", "note", "min_booking_size", "spaces_remaining", "special_offer_type", "price_1", "price_1_display", "price_2", "price_2_display", "special_offer_datetime", "special_offer_note", "original_price_1", "original_price_1_display", "original_price_2", "original_price_2_display");
+		 					
+		 					foreach ($offer_fields as $offer_field) {
+		 						$string .= '
+		 						"'.$offer_field.'" : "'.$item->$field->$offer_field.'", ';
+		 					}
+		 					$string = substr($string, 0, strlen($string) - 2);
+		 					
+		 				$string .= '
+		 				},';
+		 			}
+	 		// All other fields handled simply
  				} else {
  					$exploded = explode("->", $field);
  					count($exploded) == 1 ? $value = $item->$exploded[0] : $value = $item->$exploded[0]->$exploded[1];
@@ -88,7 +104,7 @@ if (array_key_exists($api_url, $allowed_fields)) {
  			}, ';
  	        
  		}
- 	   
+ 		
  	   	$string = substr($string, 0, strlen($string) - 2); 		
  	   	/* free result set */
  	    $string .= "
